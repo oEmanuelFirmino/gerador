@@ -1,0 +1,127 @@
+// Lista de alunos permitidos
+const alunosPermitidos = [
+    "Isabelly Aparecida Pereira",
+    "Micael Augusto Leal Marciano",
+    "Luiz Augusto Silva Coli",
+    "Larissa Bacelar Maciel",
+    "Ana Beatriz Aparecida de Souza",
+    "Eduardo Alberto Mesquita Faria Costa",
+    "Gabriel Campos Cruz",
+    "Maria Clara Marques Camargo",
+    "Maria Clara Nogueira Ribeiro",
+    "Joyce de Souza Coelho Alves",
+    "Kamily dos Santos",
+    "Gabriel dos Santos Leite",
+    "Jefferson Felipe Guedes Fidelis",
+    "Luiz Filipe Carneiro de Lima",
+    "Joao Filipe de Souza Biavati",
+    "Camila Gonçalves do Nascimento",
+    "Luiz Gustavo Mateus Teodoro",
+    "Kaue Henrique Brigagao dos Santos",
+    "Carolina Junqueira Alves",
+    "Ana Karen Matias de Andrade",
+    "Leonardo Lofiego Christo",
+    "Joao Lucas Arantes Silva",
+    "Luiz Miguel Prado de Souza",
+    "Abner Miranda Romao",
+    "Davi Miranda Romao",
+    "Matheus Motta Soriano",
+    "Sofia Pereira Dinsmore",
+    "Enzo Ribeiro da Silva",
+    "Emanuel Santiago de Paula Pedro",
+    "Lorhany Silvino Da Silva",
+    "Vitoria Soares de Oliveira",
+    "Emanuel Firmino da Silva"
+];
+
+
+
+function padronizarValor(valor) {
+    const valorLimpo = valor.replace(/[^0-9,]/g, '');
+    const valorComPonto = valorLimpo.replace(',', '.');
+    const valorFormatado = parseFloat(valorComPonto).toFixed(2);
+    return `R$ ${valorFormatado.replace('.', ',')}`;
+}
+
+function gerarCodigoAutenticacao() {
+    const caracteres = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let codigo = '';
+
+    for (let i = 0; i < 16; i++) {
+        const indice = Math.floor(Math.random() * caracteres.length);
+        codigo += caracteres.charAt(indice);
+    }
+
+    return codigo;
+}
+
+function preencherDataAtual() {
+    const dataInput = document.querySelector("#data");
+    const dataAtual = new Date().toISOString().split('T')[0];
+    dataInput.value = dataAtual;
+}
+
+function gerarPdf() {
+
+    const nomePagador = document.querySelector("#nomePagador").value;
+
+    if (!alunosPermitidos.includes(nomePagador)) {
+        alert("Aluno não permitido para gerar o comprovante\nTente escrever sem acentos!");
+        return;
+    }
+
+    const data = document.querySelector("#data").value.toString();
+    const valor = padronizarValor(document.querySelector("#valor").value);
+    const codigoAutenticacao = gerarCodigoAutenticacao();
+
+    var doc = new jsPDF();
+
+    // Adiciona um retângulo branco como plano de fundo
+    doc.setFillColor(255, 255, 255); // Branco
+    doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
+
+    // Adiciona uma tarja azul no cabeçalho
+    doc.setFillColor(33, 53, 73); // Azul escuro
+    doc.rect(0, 0, doc.internal.pageSize.width, 30, 'F');
+
+    // Adiciona o texto "Pagamento realizado" no cabeçalho
+    doc.setTextColor(255, 255, 255); // Branco
+    doc.setFontSize(16);
+    doc.text("Pagamento realizado", doc.internal.pageSize.width / 2, 15, { align: 'center' });
+
+    // Adiciona a data centralizada, em negrito e sem título
+    doc.setFontSize(18);
+    doc.setFontType('bold');
+    doc.setTextColor(0, 0, 0); // Preto
+    doc.text(data, doc.internal.pageSize.width / 2, 45, { align: 'center' });
+    doc.setFontType('normal');
+
+    // Adiciona os demais campos
+    adicionarLinhaEstilizada(doc, "Valor", 70, valor);
+    adicionarLinhaEstilizada(doc, "Documento", 80, "Comprovante de pagamento");
+
+    // Adiciona uma linha horizontal
+    doc.setDrawColor(33, 53, 73); // Cor da linha
+    doc.line(10, 90, doc.internal.pageSize.width - 10, 90);
+
+    adicionarLinhaEstilizada(doc, "Pagador", 100, nomePagador);
+    adicionarLinhaEstilizada(doc, "Recebedor", 110, "Joyce de Souza Coelho Alves")
+
+    // Adiciona o código de autenticação no rodapé
+    doc.setFontSize(12);
+    doc.text(`Código de Autenticação: ${codigoAutenticacao}`, 10, doc.internal.pageSize.height - 10);
+
+    const nomeDoArquivo = `${nomePagador}_${data}`;
+    doc.save(`${nomeDoArquivo}.pdf`);
+}
+
+function adicionarLinhaEstilizada(doc, titulo, y, texto) {
+    // Adiciona título mais claro
+    doc.setTextColor(33, 53, 73); // Azul escuro
+    doc.setFontSize(14);
+    doc.text(titulo, 10, y);
+
+    // Restaura a cor do texto para preto
+    doc.setTextColor(0, 0, 0); // Preto
+    doc.text(texto, 60, y);
+}
