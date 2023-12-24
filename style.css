@@ -13,10 +13,6 @@ header {
 }
 
 main {
-  padding: 20px;
-}
-
-form {
   max-width: 750px;
   margin: 0 auto;
   padding: 100px;
@@ -49,6 +45,7 @@ label {
   height: 80px;
   box-sizing: border-box;
   font-size: 32px;
+  margin-top: 7.5%;
 }
 
 #dataContainer {
@@ -68,6 +65,34 @@ label {
   padding: 25;
   border: none;
   font-size: 32px;
+}
+
+#checkbox {
+  margin-top: 7.5%;
+  display: flex;
+  align-items: stretch;
+}
+
+#pagamento {
+  width: 40px;
+  height: 40px;
+}
+
+#textoPagamento {
+  color: #717171;
+  font-size: 40px;
+}
+
+#selectContainer {
+  margin-top: 7.5%;
+}
+
+#mesReferente {
+  font-size: 32px;
+}
+
+.opt {
+  font-size: 12px;
 }
 
 /* Adaptação para telas menores */

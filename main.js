@@ -35,6 +35,22 @@ const alunosPermitidos = [
 ];
 
 
+const meses = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+];
+
+function mostrarSelect() {
+    const checkbox = document.querySelector("#pagamento");
+    const selectContainer = document.querySelector("#selectContainer");
+
+    if (checkbox.checked) {
+        selectContainer.style.display = "block";
+    } else {
+        selectContainer.style.display = "none";
+    }
+}
+
 
 function padronizarValor(valor) {
     const valorLimpo = valor.replace(/[^0-9,]/g, '');
@@ -74,6 +90,12 @@ function gerarPdf() {
     const valor = padronizarValor(document.querySelector("#valor").value);
     const codigoAutenticacao = gerarCodigoAutenticacao();
 
+    const checkbox = document.querySelector("#pagamento");
+    const mesReferente = checkbox.checked ? document.querySelector("#mesReferente").value : null;
+
+    const mesReferenteTexto = mesReferente ? meses[parseInt(mesReferente) - 1] : null;
+
+
     var doc = new jsPDF();
 
     // Adiciona um retângulo branco como plano de fundo
@@ -102,10 +124,14 @@ function gerarPdf() {
 
     // Adiciona uma linha horizontal
     doc.setDrawColor(33, 53, 73); // Cor da linha
-    doc.line(10, 90, doc.internal.pageSize.width - 10, 90);
+    doc.line(10, 95, doc.internal.pageSize.width - 10, 95);
 
-    adicionarLinhaEstilizada(doc, "Pagador", 100, nomePagador);
-    adicionarLinhaEstilizada(doc, "Recebedor", 110, "Joyce de Souza Coelho Alves")
+    adicionarLinhaEstilizada(doc, "Pagador", 105, nomePagador);
+    adicionarLinhaEstilizada(doc, "Recebedor", 115, "Joyce de Souza Coelho Alves")
+
+    if (mesReferente) {
+        adicionarLinhaEstilizada(doc, "Pagamento referente a", 90, mesReferenteTexto);
+    }
 
     // Adiciona o código de autenticação no rodapé
     doc.setFontSize(12);
@@ -123,5 +149,5 @@ function adicionarLinhaEstilizada(doc, titulo, y, texto) {
 
     // Restaura a cor do texto para preto
     doc.setTextColor(0, 0, 0); // Preto
-    doc.text(texto, 60, y);
+    doc.text(texto, 80, y);
 }
