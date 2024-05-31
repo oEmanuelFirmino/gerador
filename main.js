@@ -1,40 +1,3 @@
-// Lista de alunos permitidos
-const alunosPermitidos = [
-    "Isabelly Aparecida Pereira",
-    "Micael Augusto Leal Marciano",
-    "Luiz Augusto Silva Coli",
-    "Larissa Bacelar Maciel",
-    "Ana Beatriz Aparecida de Souza",
-    "Eduardo Alberto Mesquita Faria Costa",
-    "Gabriel Campos Cruz",
-    "Maria Clara Marques Camargo",
-    "Maria Clara Nogueira Ribeiro",
-    "Joyce de Souza Coelho Alves",
-    "Kamily dos Santos",
-    "Gabriel dos Santos Leite",
-    "Jefferson Felipe Guedes Fidelis",
-    "Luiz Filipe Carneiro de Lima",
-    "Joao Filipe de Souza Biavati",
-    "Camila Gonçalves do Nascimento",
-    "Luiz Gustavo Mateus Teodoro",
-    "Kaue Henrique Brigagao dos Santos",
-    "Carolina Junqueira Alves",
-    "Ana Karen Matias de Andrade",
-    "Leonardo Lofiego Christo",
-    "Joao Lucas Arantes Silva",
-    "Luiz Miguel Prado de Souza",
-    "Abner Miranda Romao",
-    "Davi Miranda Romao",
-    "Matheus Motta Soriano",
-    "Sofia Pereira Dinsmore",
-    "Enzo Ribeiro da Silva",
-    "Emanuel Santiago de Paula Pedro",
-    "Lorhany Silvino Da Silva",
-    "Vitoria Soares de Oliveira",
-    "Emanuel Firmino da Silva"
-];
-
-
 const meses = [
     "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
@@ -80,11 +43,6 @@ function preencherDataAtual() {
 function gerarPdf() {
 
     const nomePagador = document.querySelector("#nomePagador").value;
-
-    if (!alunosPermitidos.includes(nomePagador)) {
-        alert("Aluno não permitido para gerar o comprovante\nTente escrever sem acentos!");
-        return;
-    }
 
     const data = document.querySelector("#data").value.toString();
     const valor = padronizarValor(document.querySelector("#valor").value);
