@@ -2,107 +2,90 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 header {
   background-color: #333;
   color: #fff;
   text-align: center;
-  padding: 30px;
-  font-size: 1.5rem;
+  padding: 4px;
+  font-size: 1rem;
 }
 
 main {
   max-width: 750px;
-  margin: 0 auto;
-  padding: 100px;
+  margin: 52px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 16px;
 }
 
 label {
   display: block;
   margin-bottom: 10px;
-  font-size: 40px;
+  font-size: 1.5rem;
 }
 
 .input {
   width: 100%;
-  height: 100px;
   padding: 10px;
-  margin-bottom: 15px;
   box-sizing: border-box;
-  font-size: 32px;
-  border: 1px solid #717171; /* Adiciona borda */
+  font-size: 1rem;
+  border: 1px solid #717171;
 }
 
 .btn {
   background-color: #4caf50;
   color: white;
-  padding: 25;
+  padding: 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
-  height: 80px;
-  box-sizing: border-box;
-  font-size: 32px;
-  margin-top: 7.5%;
+  font-size: 1.25rem;
+  margin-top: 15px;
+}
+
+#mesesPagos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 2rem;
+}
+
+#mesesPagos label {
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+#mesesPagos input {
+  margin-right: 5px;
 }
 
 #dataContainer {
   display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #data {
-  width: 80%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #717171;
+  flex: 1;
 }
 
 #defineData {
-  width: 15%;
-  margin-left: 5%;
-  height: 100px;
+  padding: 10px;
   background-color: rgb(33, 53, 73);
   color: white;
-  padding: 25;
   border: none;
-  font-size: 32px;
-}
-
-#checkbox {
-  margin-top: 7.5%;
-  display: flex;
-  align-items: stretch;
-}
-
-#pagamento {
-  width: 40px;
-  height: 40px;
-}
-
-#textoPagamento {
-  color: #717171;
-  font-size: 40px;
-}
-
-#selectContainer {
-  margin-top: 7.5%;
-}
-
-#mesReferente {
-  font-size: 32px;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .opt {
-  font-size: 12px;
-}
-
-/* Adaptação para telas menores */
-@media screen and (max-width: 600px) {
-  form {
-    width: calc(100% - 20px);
-    box-sizing: border-box;
-  }
-
-  .input {
-    width: calc(100% - 20px);
-  }
+  font-size: 1rem;
 }

@@ -3,17 +3,11 @@ const meses = [
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
 
-function mostrarSelect() {
-    const checkbox = document.querySelector("#pagamento");
-    const selectContainer = document.querySelector("#selectContainer");
-
-    if (checkbox.checked) {
-        selectContainer.style.display = "block";
-    } else {
-        selectContainer.style.display = "none";
-    }
+function preencherDataAtual() {
+    const dataInput = document.querySelector("#data");
+    const dataAtual = new Date().toISOString().split('T')[0];
+    dataInput.value = dataAtual;
 }
-
 
 function padronizarValor(valor) {
     const valorLimpo = valor.replace(/[^0-9,]/g, '');
@@ -34,27 +28,17 @@ function gerarCodigoAutenticacao() {
     return codigo;
 }
 
-function preencherDataAtual() {
-    const dataInput = document.querySelector("#data");
-    const dataAtual = new Date().toISOString().split('T')[0];
-    dataInput.value = dataAtual;
-}
-
 function gerarPdf() {
-
     const nomePagador = document.querySelector("#nomePagador").value;
-
     const data = document.querySelector("#data").value.toString();
     const valor = padronizarValor(document.querySelector("#valor").value);
     const codigoAutenticacao = gerarCodigoAutenticacao();
 
-    const checkbox = document.querySelector("#pagamento");
-    const mesReferente = checkbox.checked ? document.querySelector("#mesReferente").value : null;
+    const mesesSelecionados = Array.from(document.querySelectorAll("#mesesPagos input:checked"))
+        .map(checkbox => checkbox.value)
+        .join(", ");
 
-    const mesReferenteTexto = mesReferente ? meses[parseInt(mesReferente) - 1] : null;
-
-
-    var doc = new jsPDF();
+    const doc = new jsPDF();
 
     // Adiciona um retângulo branco como plano de fundo
     doc.setFillColor(255, 255, 255); // Branco
@@ -85,27 +69,27 @@ function gerarPdf() {
     doc.line(10, 95, doc.internal.pageSize.width - 10, 95);
 
     adicionarLinhaEstilizada(doc, "Pagador", 105, nomePagador);
-    adicionarLinhaEstilizada(doc, "Recebedor", 115, "Joyce de Souza Coelho Alves")
+    adicionarLinhaEstilizada(doc, "Valor pago", 115, valor);
+    adicionarLinhaEstilizada(doc, "Referente", 125, mesesSelecionados);
 
-    if (mesReferente) {
-        adicionarLinhaEstilizada(doc, "Pagamento referente a", 90, mesReferenteTexto);
-    }
+    // Adiciona outra linha horizontal
+    doc.setDrawColor(33, 53, 73); // Cor da linha
+    doc.line(10, 135, doc.internal.pageSize.width - 10, 135);
 
-    // Adiciona o código de autenticação no rodapé
-    doc.setFontSize(12);
-    doc.text(`Código de Autenticação: ${codigoAutenticacao}`, 10, doc.internal.pageSize.height - 10);
+    // Adiciona o código de autenticação com fonte menor
+    doc.setFontSize(10);
+    doc.text("Autenticação", 10, 145);
+    doc.setFontSize(16);
+    doc.text(codigoAutenticacao, 10, 153);
 
-    const nomeDoArquivo = `${nomePagador}_${data}`;
-    doc.save(`${nomeDoArquivo}.pdf`);
+    doc.save("comprovante_pagamento.pdf");
 }
 
-function adicionarLinhaEstilizada(doc, titulo, y, texto) {
-    // Adiciona título mais claro
-    doc.setTextColor(33, 53, 73); // Azul escuro
-    doc.setFontSize(14);
+function adicionarLinhaEstilizada(doc, titulo, y, valor) {
+    doc.setFontSize(10);
+    doc.setTextColor(128, 128, 128); // Cinza para o título
     doc.text(titulo, 10, y);
-
-    // Restaura a cor do texto para preto
-    doc.setTextColor(0, 0, 0); // Preto
-    doc.text(texto, 80, y);
+    doc.setFontSize(16);
+    doc.setTextColor(0, 0, 0); // Preto para o valor
+    doc.text(valor, 10, y + 8);
 }

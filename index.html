@@ -3,10 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Gerador de comprovantes</title>
+    <title>Gerador de Comprovantes</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns-tz/2.5.0/date_fns_tz.min.js"></script>
-
 </head>
 
 <body>
@@ -16,10 +15,10 @@
     </header>
     <main>
         <article>
-            <label for="name">Pago por:</label>
+            <label for="nomePagador">Pago por:</label>
             <input type="text" name="nome" id="nomePagador" class="input">
         </article>
-        <article>
+        <article id="dataArticle">
             <label for="data">Data:</label>
             <div id="dataContainer">
                 <input type="date" name="data" id="data" class="input">
@@ -31,26 +30,20 @@
             <input type="text" name="valor" id="valor" class="input">
         </article>
         <article>
-            <article id="checkbox">
-                <input type="checkbox" name="pagamento" id="pagamento" value="pagamento" onchange="mostrarSelect()">
-                <label for="pagamento" id="textoPagamento">Pagamento realizado fora do mês correspondente</label>
-            </article>
-            <div id="selectContainer" style="display: none;">
-                <label for="mesReferente">Referente ao mês:</label>
-                <select name="mesReferente" id="mesReferente" class="input">
-                    <option value="1" class="opt">Janeiro</option>
-                    <option value="2" class="opt">Fevereiro</option>
-                    <option value="3" class="opt">Março</option>
-                    <option value="4" class="opt">Abril</option>
-                    <option value="5" class="opt">Maio</option>
-                    <option value="6" class="opt">Junho</option>
-                    <option value="7" class="opt">Julho</option>
-                    <option value="8" class="opt">Agosto</option>
-                    <option value="9" class="opt">Setembro</option>
-                    <option value="10" class="opt">Outubro</option>
-                    <option value="11" class="opt">Novembro</option>
-                    <option value="12" class="opt">Dezembro</option>
-                </select>
+            <label>Meses que estão sendo pagos:</label>
+            <div id="mesesPagos">
+                <label><input type="checkbox" class="meses" name="meses" value="Janeiro"> Janeiro</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Fevereiro"> Fevereiro</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Março"> Março</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Abril"> Abril</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Maio"> Maio</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Junho"> Junho</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Julho"> Julho</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Agosto"> Agosto</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Setembro"> Setembro</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Outubro"> Outubro</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Novembro"> Novembro</label>
+                <label><input type="checkbox" class="meses" name="meses" value="Dezembro"> Dezembro</label>
             </div>
         </article>
         <button onclick="gerarPdf()" class="btn">Gerar PDF</button>
