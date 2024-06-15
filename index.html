@@ -1,60 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Gerador de Comprovantes</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns-tz/2.5.0/date_fns_tz.min.js"></script>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <h1>Gerador de Comprovantes</h1>
+      <h1>Gerador de Comprovantes</h1>
     </header>
     <main>
-        <article>
-            <label for="nomePagador">Pago por:</label>
-            <input type="text" name="nome" id="nomePagador" class="input">
-        </article>
-        <article id="dataArticle">
-            <label for="data">Data:</label>
-            <div id="dataContainer">
-                <input type="date" name="data" id="data" class="input">
-                <button type="button" onclick="preencherDataAtual()" id="defineData">Hoje</button>
-            </div>
-        </article>
-        <article>
-            <label for="valor">Valor pago:</label>
-            <input type="text" name="valor" id="valor" class="input">
-        </article>
-        <article>
-            <label>Meses que estão sendo pagos:</label>
-            <div id="mesesPagos">
-                <label><input type="checkbox" class="meses" name="meses" value="Janeiro"> Janeiro</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Fevereiro"> Fevereiro</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Março"> Março</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Abril"> Abril</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Maio"> Maio</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Junho"> Junho</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Julho"> Julho</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Agosto"> Agosto</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Setembro"> Setembro</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Outubro"> Outubro</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Novembro"> Novembro</label>
-                <label><input type="checkbox" class="meses" name="meses" value="Dezembro"> Dezembro</label>
-            </div>
-        </article>
-        <button onclick="gerarPdf()" class="btn">Gerar PDF</button>
+      <article>
+        <label for="nomePagador">Pago por:</label>
+        <input type="text" name="nome" id="nomePagador" class="input" />
+      </article>
+      <article id="dataArticle">
+        <label for="data">Data:</label>
+        <div id="dataContainer">
+          <input type="date" name="data" id="data" class="input" />
+          <button type="button" onclick="preencherDataAtual()" id="defineData">
+            Hoje
+          </button>
+        </div>
+      </article>
+      <article>
+        <label for="valor">Valor pago:</label>
+        <input type="text" name="valor" id="valor" class="input" />
+      </article>
+      <article>
+        <label>Meses que estão sendo pagos:</label>
+        <div id="mesesPagos">
+          <label
+            ><input
+              type="checkbox"
+              class="meses"
+              name="meses"
+              value="Janeiro"
+            />
+            Janeiro</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="meses"
+              name="meses"
+              value="Fevereiro"
+            />
+            Fevereiro</label
+          >
+          <label
+            ><input type="checkbox" class="meses" name="meses" value="Março" />
+            Março</label
+          >
+          <label
+            ><input type="checkbox" class="meses" name="meses" value="Abril" />
+            Abril</label
+          >
+          <label
+            ><input type="checkbox" class="meses" name="meses" value="Maio" />
+            Maio</label
+          >
+          <label
+            ><input type="checkbox" class="meses" name="meses" value="Junho" />
+            Junho</label
+          >
+          <label
+            ><input type="checkbox" class="meses" name="meses" value="Julho" />
+            Julho</label
+          >
+          <label
+            ><input type="checkbox" class="meses" name="meses" value="Agosto" />
+            Agosto</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="meses"
+              name="meses"
+              value="Setembro"
+            />
+            Setembro</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="meses"
+              name="meses"
+              value="Outubro"
+            />
+            Outubro</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="meses"
+              name="meses"
+              value="Novembro"
+            />
+            Novembro</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="meses"
+              name="meses"
+              value="Dezembro"
+            />
+            Dezembro</label
+          >
+        </div>
+      </article>
+      <button onclick="gerarPdf()" class="btn">Gerar PDF</button>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
-        integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+      integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+      crossorigin="anonymous"
+    ></script>
 
     <script src="main.js"></script>
-
-</body>
-
+  </body>
 </html>

@@ -62,14 +62,14 @@ function gerarPdf() {
 
     // Adiciona os demais campos
     adicionarLinhaEstilizada(doc, "Valor", 70, valor);
-    adicionarLinhaEstilizada(doc, "Documento", 80, "Comprovante de pagamento");
+    adicionarLinhaEstilizada(doc, "Documento", 85, "Comprovante de pagamento");
 
     // Adiciona uma linha horizontal
     doc.setDrawColor(33, 53, 73); // Cor da linha
     doc.line(10, 95, doc.internal.pageSize.width - 10, 95);
 
-    adicionarLinhaEstilizada(doc, "Pagador", 105, nomePagador);
-    adicionarLinhaEstilizada(doc, "Valor pago", 115, valor);
+    adicionarLinhaEstilizada(doc, "Pagador", 100, nomePagador);
+    adicionarLinhaEstilizada(doc, "Valor pago", 112.5, valor);
     adicionarLinhaEstilizada(doc, "Referente", 125, mesesSelecionados);
 
     // Adiciona outra linha horizontal
@@ -91,5 +91,5 @@ function adicionarLinhaEstilizada(doc, titulo, y, valor) {
     doc.text(titulo, 10, y);
     doc.setFontSize(16);
     doc.setTextColor(0, 0, 0); // Preto para o valor
-    doc.text(valor, 10, y + 8);
+    doc.text(valor, 10, y + 5);
 }
