@@ -82,7 +82,10 @@ function gerarPdf() {
     doc.setFontSize(16);
     doc.text(codigoAutenticacao, 10, 153);
 
-    doc.save("comprovante_pagamento.pdf");
+    // Remove caracteres inválidos do nome do pagador para usá-lo no nome do arquivo
+    const nomeArquivoSeguro = nomePagador.replace(/[^a-zA-Z0-9]/g, '_');
+
+    doc.save(`${nomeArquivoSeguro}-${data}.pdf`);
 }
 
 function adicionarLinhaEstilizada(doc, titulo, y, valor) {
